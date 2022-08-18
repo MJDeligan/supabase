@@ -43,7 +43,7 @@ interface Props {
   isNewRecord: boolean
   hasImportContent: boolean
   dragHandleProps?: any
-  shouldFocus?: boolean
+  focusOnCreate?: boolean
   onEditRelation: (column: any) => void
   onUpdateColumn: (changes: Partial<ColumnField>) => void
   onRemoveColumn: () => void
@@ -55,7 +55,7 @@ const Column: FC<Props> = ({
   isNewRecord = false,
   hasImportContent = false,
   dragHandleProps = {},
-  shouldFocus = false,
+  focusOnCreate = false,
   onEditRelation = () => {},
   onUpdateColumn = () => {},
   onRemoveColumn = () => {},
@@ -66,7 +66,7 @@ const Column: FC<Props> = ({
   
   const nameInputRef = useRef<HTMLInputElement>();
   
-  useEffect(() => { if (shouldFocus) nameInputRef?.current?.focus() }, []);
+  useEffect(() => { if (focusOnCreate) nameInputRef?.current?.focus() }, []);
 
   column.isNullable ? (settingsCount += 1) : null
   column.isIdentity ? (settingsCount += 1) : null
