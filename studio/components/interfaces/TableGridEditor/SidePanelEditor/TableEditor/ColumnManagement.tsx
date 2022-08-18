@@ -112,7 +112,10 @@ const ColumnManagement: FC<Props> = ({
     onColumnsUpdated(updatedColumns)
   }
 
+  const [isInitialColumn, setInitialColumnState] = useState(false);
+
   const onAddColumn = () => {
+    setInitialColumnState(true)
     const defaultColumn = generateColumnField()
     const updatedColumns = columns.concat(defaultColumn)
     onColumnsUpdated(updatedColumns)
@@ -267,6 +270,7 @@ const ColumnManagement: FC<Props> = ({
                               isNewRecord={isNewRecord}
                               hasImportContent={hasImportContent}
                               dragHandleProps={draggableProvided.dragHandleProps}
+                              shouldFocus={isInitialColumn}
                               onEditRelation={() => {
                                 setSelectedColumnToEditRelation(column)
                               }}
@@ -301,6 +305,7 @@ const ColumnManagement: FC<Props> = ({
                             isNewRecord={isNewRecord}
                             hasImportContent={hasImportContent}
                             dragHandleProps={draggableProvided.dragHandleProps}
+                            shouldFocus={isInitialColumn}
                             onEditRelation={() => {
                               setSelectedColumnToEditRelation(column)
                             }}
