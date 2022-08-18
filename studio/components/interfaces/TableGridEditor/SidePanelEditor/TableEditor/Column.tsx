@@ -241,7 +241,12 @@ const Column: FC<Props> = ({
       </div>
       {!hasImportContent && (
         <div className="flex w-[5%] justify-end">
-          <div className="cursor-pointer" onClick={() => onRemoveColumn()}>
+          <div
+            className="cursor-pointer"
+            tabIndex={0}
+            onClick={() => onRemoveColumn()}
+            onKeyPress={(e) => { if (e.key == 'Enter') onRemoveColumn() }}
+          >
             <Typography>
               <IconX strokeWidth={1} />
             </Typography>

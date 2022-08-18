@@ -63,6 +63,8 @@ const ColumnManagement: FC<Props> = ({
     (column: ColumnField) => column.isPrimaryKey
   )
 
+  let addButton: HTMLButtonElement | null | undefined
+
   const saveColumnForeignKey = (
     foreignKeyConfiguration: { table: PostgresTable; column: PostgresColumn } | undefined
   ) => {
@@ -123,6 +125,7 @@ const ColumnManagement: FC<Props> = ({
 
   const onRemoveColumn = (columnToRemove: ColumnField) => {
     const updatedColumns = columns.filter((column: ColumnField) => column.id !== columnToRemove.id)
+    addButton?.focus()
     onColumnsUpdated(updatedColumns)
   }
 
@@ -324,7 +327,7 @@ const ColumnManagement: FC<Props> = ({
         </div>
 
         {!hasImportContent && (
-          <Button type="default" onClick={() => onAddColumn()}>
+          <Button type="default" ref={(refHandle) => addButton = refHandle?.button()} onClick={() => onAddColumn()}>
             Add column
           </Button>
         )}
