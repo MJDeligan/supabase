@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect, useRef } from 'react'
 import { isUndefined } from 'lodash'
 import {
   Checkbox,
@@ -61,6 +61,10 @@ const Column: FC<Props> = ({
   const suggestions: Suggestion[] = typeExpressionSuggestions?.[column.format] ?? []
 
   let settingsCount = 0
+  
+  const nameInputRef = useRef<HTMLInputElement>();
+
+  useEffect(() => nameInputRef?.current?.focus(), []);
 
   column.isNullable ? (settingsCount += 1) : null
   column.isIdentity ? (settingsCount += 1) : null
@@ -80,6 +84,7 @@ const Column: FC<Props> = ({
         <div className="flex w-[95%] items-center justify-between">
           <Input
             value={column.name}
+            inputRef={nameInputRef as any}
             size="small"
             placeholder="column name"
             title={column.name}
